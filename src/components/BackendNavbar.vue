@@ -1,0 +1,62 @@
+<template>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
+    <div class="container">
+      <a class="navbar-brand" href="#">vatta 後台管理系統</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon" />
+      </button>
+
+      <div id="navbarSupportedContent" class="collapse navbar-collapse">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <router-link
+             class="nav-link mr-2"
+             :class="{active: $route.name === 'Backend_products'}"
+             :to="{ name: 'Backend_products'}">產品列表</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link
+             class="nav-link mr-2"
+             :class="{active: $route.name === 'Orders'}"
+             :to="{ name: 'Orders'}">訂單列表</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link
+             class="nav-link mr-2"
+             :class="{active: $route.name === 'Storages'}"
+             :to="{ name: 'Storages'}">圖片管理</router-link>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" @click.prevent="signOut">登出</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</template>
+
+<script>
+export default {
+  name: 'backendNavbar',
+  data() {
+    return {
+      token: '',
+    };
+  },
+  methods: {
+    signOut() {
+      // 清空token
+      document.cookie = 'token=;expires=;';
+      this.$router.push('/login');
+    },
+  },
+};
+</script>
