@@ -418,9 +418,8 @@ export default {
           this.isLoading = false;
           this.getProducts();
         })
-        .catch((err) => {
+        .catch(() => {
           this.isLoading = false;
-          console.log(err);
         });
     },
     delProduct() {
@@ -450,8 +449,7 @@ export default {
             this.tempProduct.imageUrl.push(res.data.data.path);
           }
         })
-        .catch((err) => {
-          console.log(err);
+        .catch(() => {
           this.status.fileUploading = false;
         });
     },

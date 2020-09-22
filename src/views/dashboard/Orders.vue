@@ -79,9 +79,8 @@ export default {
           this.pagination = res.data.meta.pagination;
           this.isLoading = false;
         })
-        .catch((err) => {
+        .catch(() => {
           this.isLoading = false;
-          console.log(err);
         });
     },
     setOrderPaid(item) {

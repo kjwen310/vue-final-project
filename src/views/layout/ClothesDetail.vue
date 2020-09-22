@@ -187,9 +187,8 @@ export default {
           this.getCart();
           this.isLoading = false;
         })
-        .catch((err) => {
+        .catch(() => {
           this.isLoading = false;
-          console.log(err);
         });
     },
     changeImg(index) {
@@ -215,9 +214,8 @@ export default {
           this.$bus.$emit('addCartAmount');
           this.isLoading = false;
         })
-        .catch((err) => {
+        .catch(() => {
           this.isLoading = false;
-          console.log(err);
         });
     },
     getCart() {
@@ -234,9 +232,8 @@ export default {
           }
           this.isLoading = false;
         })
-        .catch((err) => {
+        .catch(() => {
           this.isLoading = false;
-          console.log(err);
         });
     },
   },

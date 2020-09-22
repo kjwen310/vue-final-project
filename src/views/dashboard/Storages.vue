@@ -124,13 +124,12 @@ export default {
         const api = `${this.apiPath}${this.uuid}/admin/storage/${temp.id}`;
         this.$http.delete(api)
           .then(() => {
-            console.log('成功！');
+            this.tempData = [];
           })
-          .catch((err) => {
-            console.log(err);
+          .catch(() => {
+            this.tempData = [];
           });
       });
-      this.tempData = [];
       $('#deleteModal').modal('hide');
       this.getData();
       this.isLoading = false;
