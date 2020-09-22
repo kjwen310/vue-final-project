@@ -112,8 +112,7 @@ export default {
           })
           .then(() => {
             this.$bus.$emit('addCartAmount');
-          })
-          .catch((err) => console.log(err));
+          });
       });
       this.wishList = [];
       this.isEmpty = true;
@@ -128,9 +127,8 @@ export default {
           this.cartAmount = res.data.data.length;
           this.isLoading = false;
         })
-        .catch((err) => {
+        .catch(() => {
           this.isLoading = false;
-          console.log(err);
         });
     },
     goToCart() {

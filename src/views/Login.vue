@@ -83,8 +83,7 @@ export default {
           this.isLoading = false;
           this.$router.push('/admin/products');
         })
-        .catch((err) => {
-          console.log(err);
+        .catch(() => {
           this.isLoading = false;
         });
     },
