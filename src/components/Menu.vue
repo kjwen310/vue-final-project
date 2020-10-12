@@ -1,7 +1,7 @@
 <template>
   <!-- 此元件是左邊的選單 -->
   <div class="menu sticky-top">
-    <div class="logo mb-5" @click="$router.push('/')">
+    <div class="logo mb-5" @click="$router.push('/shop/home')">
       <img src="https://hexschool-api.s3.us-west-2.amazonaws.com/custom/FbhIfAOx2ky5jB29QwBvu5ABReevcmLxUmTHE3SnziaRfusdbH0Ap2IOr4ycIWucPuMYszMczsGyAdhy0ke31dYYLkraePtmbdvL6hi24fsrjiV8a4b94gMBNpvYjE6b.svg" alt="logo">
     </div>
     <div class="accordion mb-5" id="menuAccordion">
@@ -40,10 +40,11 @@
     </div>
     <div class="text-left text-muted">
       <ul class="list-group">
-        <li class="list-group-item" @click="$router.push('/columns')">Column</li>
-        <li class="list-group-item" @click="$router.push('/about')">About</li>
-        <li class="list-group-item" @click="$router.push('/info')">其他資訊</li>
-        <li class="list-group-item" @click="$router.push('/storeInfo')">實體店資訊</li>
+        <li class="list-group-item" @click="$router.push('/shop/columns')">Column</li>
+        <li class="list-group-item" @click="$router.push('/shop/about')">About</li>
+        <li class="list-group-item" @click="$router.push('/shop/info')">其他資訊</li>
+        <li class="list-group-item" @click="$router.push('/shop/storeInfo')">實體店資訊</li>
+        <li class="list-group-item" @click="$router.push('/')">vatta 形象頁</li>
       </ul>
     </div>
   </div>

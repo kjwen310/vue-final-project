@@ -48,7 +48,7 @@
             <button
               type="button"
               class="btn btn-outline-secondary w-25 mr-3"
-              @click="$router.push('/')">回前台</button>
+              @click="$router.push('/shop/home')">回前台</button>
             <button
               type="submit"
               class="btn btn-primary text-white w-25">登入</button>

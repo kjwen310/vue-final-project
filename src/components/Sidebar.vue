@@ -22,7 +22,7 @@
         >
           <i class="text-muted far fa-heart"></i>
         </button>
-        <div id="test" class="dropdown-menu" data-stopPropagation="true">
+        <div id="stopPropagation" class="dropdown-menu" data-stopPropagation="true">
           <div class="px-3 py-4">
             <table class="table table-sm px-3">
               <thead>

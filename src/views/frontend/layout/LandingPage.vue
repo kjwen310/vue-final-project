@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="shop-button text-white" @click="$router.push('/')">
+    <div class="shop-button text-white" @click="$router.push('/shop/home')">
       <div class="mb-2">
         <i class="fas fa-shopping-cart fa-2x"></i>
       </div>
@@ -112,7 +112,7 @@
             <img src="https://hexschool-api.s3.us-west-2.amazonaws.com/custom/BEsLDtsR4xR9fSivNCvRwFQz87a4kJIWjVVHUN3kt83cnnJhAn71b7w59KbS7SNrkYVcSo1EDDc0BqOvpiDipAcuGqLBTyRYCpoW6ejj1VEpXk6q8yqIN3rDsCu2gjiT.png" alt="logo">
           </div>
         </div>
-        <button type="button" class="btn btn-block text-white p-3" @click="$router.push('/')">
+        <button type="button" class="btn btn-block p-3" @click="$router.push('/shop/home')">
           <div class="d-flex justify-content-center">
             <div class="mr-3">
               <i class="fas fa-angle-right"></i>
@@ -385,6 +385,7 @@ export default {
       letter-spacing: 0.2rem;
       border: none;
       outline: none;
+      color: white;
       border-radius: 0.2rem;
       background-color: #202020;
       box-shadow: inset 0 0 0 0 #ffa010;

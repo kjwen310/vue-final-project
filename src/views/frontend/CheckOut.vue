@@ -113,9 +113,9 @@ export default {
               confirmButtonText: '回到商城',
             }).then((result) => {
               if (result.isConfirmed) {
-                this.$router.push('/');
+                this.$router.push('/shop/home');
               } else {
-                this.$router.push('/');
+                this.$router.push('/shop/home');
               }
             });
           } else {
@@ -127,9 +127,9 @@ export default {
               confirmButtonText: '回到商城',
             }).then((result) => {
               if (result.isConfirmed) {
-                this.$router.push('/');
+                this.$router.push('/shop/home');
               } else {
-                this.$router.push('/');
+                this.$router.push('/shop/home');
               }
             });
           }
@@ -143,9 +143,9 @@ export default {
             confirmButtonText: '回到商城',
           }).then((result) => {
             if (result.isConfirmed) {
-              this.$router.push('/');
+              this.$router.push('/shop/home');
             } else {
-              this.$router.push('/');
+              this.$router.push('/shop/home');
             }
           });
         });

@@ -4,7 +4,7 @@
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <a href="#" @click.prevent="$router.push('/')">首頁</a>
+          <a href="#" @click.prevent="$router.push('/shop/home')">首頁</a>
         </li>
         <li class="breadcrumb-item">
           <a href="#" @click.prevent="$router.push('/cart/cartDetail')">購物車</a>
@@ -136,7 +136,7 @@
                 <button
                   type="button"
                   class="btn btn-outline-info"
-                  @click="$router.push('/products/clothes')"
+                  @click="$router.push('shop/products/clothes')"
                 >取消</button>
                 <button type="submit" class="btn btn-primary ml-3" :disabled="invalid">送出訂單</button>
               </div>

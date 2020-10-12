@@ -3,13 +3,13 @@
     <div class="container">
       <div class="text">&copy; vatta 二手風格小舖 本網站僅供練習</div>
       <div class="list-group list-group-horizontal justify-content-center">
-        <a href="#" class="list-group-item text-muted" @click.prevent="$router.push('/info')">
+        <a href="#" class="list-group-item text-muted" @click.prevent="$router.push('/shop/info')">
           隱私權政策
         </a>
-        <a href="#" class="list-group-item text-muted" @click.prevent="$router.push('/info')">
+        <a href="#" class="list-group-item text-muted" @click.prevent="$router.push('/shop/info')">
           退換貨說明
         </a>
-        <a href="#" class="list-group-item text-muted" @click.prevent="$router.push('/info')">
+        <a href="#" class="list-group-item text-muted" @click.prevent="$router.push('/shop/info')">
           消費者權益須知
         </a>
        </div>

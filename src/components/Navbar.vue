@@ -21,7 +21,7 @@
           </span>
         </div>
       </button>
-      <div class="navbar-brand" @click="$router.push('/')">
+      <div class="navbar-brand" @click="$router.push('/shop/home')">
         <img src="https://hexschool-api.s3.us-west-2.amazonaws.com/custom/BEsLDtsR4xR9fSivNCvRwFQz87a4kJIWjVVHUN3kt83cnnJhAn71b7w59KbS7SNrkYVcSo1EDDc0BqOvpiDipAcuGqLBTyRYCpoW6ejj1VEpXk6q8yqIN3rDsCu2gjiT.png" alt="logo" class="w-100">
       </div>
       <div class="mr-3">
@@ -124,19 +124,22 @@
             </div>
           </div>
           <div class="nav-item">
-            <a class="nav-link" href="#" @click.prevent="$router.push('/')">Home</a>
+            <a class="nav-link" href="#" @click.prevent="$router.push('/shop/home')">Home</a>
           </div>
           <div class="nav-item">
-            <a class="nav-link" href="#" @click.prevent="$router.push('/columns')">Column</a>
+            <a class="nav-link" href="#" @click.prevent="$router.push('/shop/columns')">Column</a>
           </div>
           <div class="nav-item">
-            <a class="nav-link" href="#" @click.prevent="$router.push('/about')">About</a>
+            <a class="nav-link" href="#" @click.prevent="$router.push('/shop/about')">About</a>
           </div>
           <div class="nav-item">
-            <a class="nav-link" href="#" @click.prevent="$router.push('/storeInfo')">實體店資訊</a>
+            <a class="nav-link" href="#" @click.prevent="$router.push('/shop/info')">其他資訊</a>
           </div>
           <div class="nav-item">
-            <a class="nav-link" href="#" @click.prevent="$router.push('/info')">其他資訊</a>
+            <a class="nav-link" href="#" @click.prevent="$router.push('/shop/storeInfo')">實體店資訊</a>
+          </div>
+          <div class="nav-item">
+            <a class="nav-link" href="#" @click.prevent="$router.push('/')">vatta 形象頁</a>
           </div>
         </div>
       </div>

@@ -5,16 +5,16 @@ Vue.use(VueRouter);
 
 const routes = [
   {
-    path: '/landingPage',
+    path: '/',
     name: 'LandingPage',
     component: () => import('../views/frontend/layout/LandingPage.vue'),
   },
   {
-    path: '/',
+    path: '/shop',
     component: () => import('../views/frontend/layout/Shop.vue'),
     children: [
       {
-        path: '',
+        path: 'home',
         name: 'Home',
         component: () => import('../views/frontend/Home.vue'),
       },

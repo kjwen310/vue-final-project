@@ -43,7 +43,7 @@
               <button
                type="button"
                class="btn btn-outline-dark btn-block"
-               @click="$router.push('/about')">關於我們</button>
+               @click="$router.push('/shop/about')">關於我們</button>
             </div>
           </div>
         </div>

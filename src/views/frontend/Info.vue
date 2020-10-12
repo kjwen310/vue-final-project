@@ -3,7 +3,7 @@
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <a href="#" @click.prevent="$router.push('/')">首頁</a>
+          <a href="#" @click.prevent="$router.push('/shop/home')">首頁</a>
         </li>
         <li class="breadcrumb-item active">消費相關資訊</li>
       </ol>
