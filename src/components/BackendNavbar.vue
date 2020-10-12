@@ -25,14 +25,14 @@
           <li class="nav-item">
             <router-link
              class="nav-link mr-2"
-             :class="{active: $route.name === 'Orders'}"
-             :to="{ name: 'Orders'}">訂單列表</router-link>
+             :class="{active: $route.name === 'Backend_orders'}"
+             :to="{ name: 'Backend_orders'}">訂單列表</router-link>
           </li>
           <li class="nav-item">
             <router-link
              class="nav-link mr-2"
-             :class="{active: $route.name === 'Storages'}"
-             :to="{ name: 'Storages'}">圖片管理</router-link>
+             :class="{active: $route.name === 'Backend_storages'}"
+             :to="{ name: 'Backend_storages'}">圖片管理</router-link>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#" @click.prevent="signOut">登出</a>
@@ -45,7 +45,6 @@
 
 <script>
 export default {
-  name: 'backendNavbar',
   data() {
     return {
       token: '',

@@ -5,81 +5,79 @@ Vue.use(VueRouter);
 
 const routes = [
   {
+    path: '/landingPage',
+    name: 'LandingPage',
+    component: () => import('../views/frontend/layout/LandingPage.vue'),
+  },
+  {
     path: '/',
-    name: 'Shop',
-    component: () => import('../views/layout/Shop.vue'),
+    component: () => import('../views/frontend/layout/Shop.vue'),
     children: [
       {
         path: '',
         name: 'Home',
-        component: () => import('../views/layout/Home.vue'),
+        component: () => import('../views/frontend/Home.vue'),
       },
       {
         path: 'products/:category',
         name: 'Products',
-        component: () => import('../views/layout/Products.vue'),
+        component: () => import('../views/frontend/Products.vue'),
       },
       {
         path: 'products/:subCategory',
         name: 'SubProducts',
-        component: () => import('../views/layout/SubProducts.vue'),
+        component: () => import('../views/frontend/SubProducts.vue'),
       },
       {
         path: 'product/:id',
         name: 'Product',
-        component: () => import('../views/layout/ClothesDetail.vue'),
+        component: () => import('../views/frontend/ClothesDetail.vue'),
       },
       {
         path: 'about',
         name: 'About',
-        component: () => import('../views/layout/About.vue'),
+        component: () => import('../views/frontend/About.vue'),
       },
       {
         path: 'info',
         name: 'Info',
-        component: () => import('../views/layout/Info.vue'),
+        component: () => import('../views/frontend/Info.vue'),
       },
       {
         path: 'storeInfo',
         name: 'StoreInfo',
-        component: () => import('../views/layout/StoreInfo.vue'),
+        component: () => import('../views/frontend/StoreInfo.vue'),
       },
       {
         path: 'columns',
         name: 'Columns',
-        component: () => import('../views/layout/Columns.vue'),
+        component: () => import('../views/frontend/Columns.vue'),
       },
       {
         path: 'column/:id',
         name: 'Column',
-        component: () => import('../views/layout/Column.vue'),
+        component: () => import('../views/frontend/Column.vue'),
       },
     ],
   },
   {
     path: '/cart',
-    name: 'Cart',
-    component: () => import('../views/cart/Cart.vue'),
+    component: () => import('../views/frontend/layout/Cart.vue'),
     children: [
       {
         path: 'cartDetail',
         name: 'CartDetail',
-        component: () => import('../views/cart/CartDetail.vue'),
+        component: () => import('../views/frontend/CartDetail.vue'),
       },
       {
         path: 'order',
         name: 'Order',
-        component: () => import('../views/cart/Order.vue'),
+        component: () => import('../views/frontend/Order.vue'),
       },
       {
         path: 'checkout',
         name: 'CheckOut',
-        component: () => import('../views/cart/CheckOut.vue'),
-      },
-      {
-        path: 'complete',
-        name: 'Complete',
-        component: () => import('../views/cart/Complete.vue'),
+        component: () => import('../views/frontend/CheckOut.vue'),
       },
     ],
   },
@@ -90,25 +88,24 @@ const routes = [
   },
   {
     path: '/admin',
-    name: '後台',
-    component: () => import('../views/dashboard/Dashboard.vue'),
+    component: () => import('../views/backend/Dashboard.vue'),
     children: [
       {
         path: 'products',
         name: 'Backend_products',
-        component: () => import('../views/dashboard/Products.vue'),
+        component: () => import('../views/backend/Products.vue'),
         meta: { requiresAuth: true },
       },
       {
         path: 'orders',
-        name: 'Orders',
-        component: () => import('../views/dashboard/Orders.vue'),
+        name: 'Backend_orders',
+        component: () => import('../views/backend/Orders.vue'),
         meta: { requiresAuth: true },
       },
       {
         path: 'storages',
-        name: 'Storages',
-        component: () => import('../views/dashboard/Storages.vue'),
+        name: 'Backend_storages',
+        component: () => import('../views/backend/Storages.vue'),
         meta: { requiresAuth: true },
       },
     ],
@@ -117,6 +114,11 @@ const routes = [
 
 const router = new VueRouter({
   routes,
+});
+
+// 每次切換路由，視野都會回到頁頂
+router.afterEach(() => {
+  window.scrollTo(0, 0);
 });
 
 export default router;

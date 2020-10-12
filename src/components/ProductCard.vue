@@ -5,7 +5,7 @@
         <div class="card">
           <div class="inner">
             <a href="#" @click.prevent="getDetail(product.id)">
-              <img class="card-img-top" :src="product.imageUrl[0]" alt="img" />
+              <img class="card-img-top" :src="product.imageUrl[0]" :alt="product.title + '產品照'" />
             </a>
             <button class="wish" type="button" @click="addToWishList(product)">
               <div v-if="product.isAddedToWishList === true">
@@ -54,14 +54,12 @@ export default {
       products: [],
       wishList: [],
       isLoading: false,
-      uuid: process.env.VUE_APP_UUID,
-      apiPath: process.env.VUE_APP_APIPATH,
     };
   },
   methods: {
     getProducts() {
       this.isLoading = true;
-      const api = `${this.apiPath}${this.uuid}/ec/products?paged=50`;
+      const api = `${process.env.VUE_APP_APIPATH}${process.env.VUE_APP_UUID}/ec/products?paged=50`;
       this.$http.get(api).then((res) => {
         if (this.number) {
           /* eslint-disable */
@@ -117,14 +115,6 @@ export default {
     this.$bus.$on('wishListInfo', (wishList) => {
       this.wishList = wishList;
     });
-    // 監聽sidebar是否刪除願望，若有，則更新該商品的願望狀態
-    this.$bus.$on('switchStatus', (id) => {
-      this.products.forEach((item) => {
-        if (item.id === id) {
-          this.$set(item, 'isAddedToWishList', false);
-        }
-      });
-    });
   },
   beforeMount() {
     // 每次頁面更新時，重新取得目前的wishList資料，以判斷商品的願望狀態
@@ -134,6 +124,14 @@ export default {
     });
   },
   mounted() {
+    // 監聽sidebar是否刪除願望，若有，則更新該商品的願望狀態
+    this.$bus.$on('switchStatus', (id) => {
+      this.products.forEach((item) => {
+        if (item.id === id) {
+          this.$set(item, 'isAddedToWishList', false);
+        }
+      });
+    });
     this.getProducts();
   },
   beforeDestroy() {
@@ -151,17 +149,18 @@ export default {
   .inner {
     overflow: hidden;
     position: relative;
+    img {
+      transition: all 1s ease;
+    }
     .wish {
       position: absolute;
       top: 0.6rem;
       right: 0.8rem;
+      outline: none;
     }
     .fa-heart {
       font-size: 1.3rem;
       font-weight: lighter;
-    }
-    img {
-      transition: all 1s ease;
     }
     .see-more {
       position: absolute;
@@ -179,8 +178,8 @@ export default {
     }
     &:hover {
       img {
-        transform: scale(1.08);
         opacity: 0.6;
+        transform: scale(1.08);
       }
       .see-more {
         opacity: 0.8;
@@ -203,6 +202,54 @@ export default {
     letter-spacing: 0.2rem;
     .line-through {
       text-decoration: line-through;
+    }
+  }
+  @media (max-width: 768px) {
+    .inner {
+      .wish {
+        right: 0.5rem;
+      }
+    }
+  }
+  @media (max-width: 414px) {
+    .inner {
+      .wish {
+        top: 0.4rem;
+        right: 0.3rem;
+      }
+      .fa-heart {
+        font-size: 1rem;
+      }
+      .see-more {
+        .fas {
+          font-size: 1rem;
+        }
+      }
+    }
+  }
+  @media (max-width: 320px) {
+    h5 {
+      font-size: 0.8rem;
+    }
+    .price-style {
+      font-size: 0.45rem;
+      letter-spacing: 0.1rem;
+    }
+  }
+  @media (max-width: 280px) {
+    .inner {
+      .wish {
+        top: 0.2rem;
+        right: 0.18rem;
+      }
+      .fa-heart {
+        font-size: 0.7rem;
+      }
+      .see-more {
+        .fas {
+          font-size: 0.7rem;
+        }
+      }
     }
   }
 </style>

@@ -10,10 +10,16 @@
         aria-controls="navbarCollapse"
         aria-expanded="false"
         aria-label="Toggle navigation"
+        @click="isShow = !isShow"
       >
-        <span>
-          <i class="fas fa-bars"></i>
-        </span>
+        <div class="toggler-icon">
+          <span v-if="!isShow">
+            <i class="fas fa-bars"></i>
+          </span>
+          <span v-else>
+            <i class="fas fa-times text-muted"></i>
+          </span>
+        </div>
       </button>
       <div class="navbar-brand" @click="$router.push('/')">
         <img src="https://hexschool-api.s3.us-west-2.amazonaws.com/custom/BEsLDtsR4xR9fSivNCvRwFQz87a4kJIWjVVHUN3kt83cnnJhAn71b7w59KbS7SNrkYVcSo1EDDc0BqOvpiDipAcuGqLBTyRYCpoW6ejj1VEpXk6q8yqIN3rDsCu2gjiT.png" alt="logo" class="w-100">
@@ -40,15 +46,15 @@
             <i class="text-muted far fa-size fa-heart"></i>
           </button>
           <!-- 以下是願望清單(下拉式選單) -->
-          <div id="test" class="dropdown-menu drop-menu-right" data-stopPropagation="true">
+          <div id="dropdown" class="dropdown-menu drop-menu-right" data-stopPropagation="true">
             <div class="px-3 py-4">
               <table class="table table-sm px-3">
                 <thead>
                   <tr>
                     <th scope="col">名稱</th>
-                    <th scope="col" width="50">數量</th>
-                    <th scope="col" width="100">單價</th>
-                    <th scope="col" width="50">刪除</th>
+                    <th scope="col" width="45">數量</th>
+                    <th scope="col" width="80">單價</th>
+                    <th scope="col" width="45">刪除</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -104,34 +110,33 @@
                 data-parent="#menuAccordion"
               >
                 <div>
-                  <div class="list-group text-left">
-                    <a
-                      href="#"
+                  <ul class="list-group text-left">
+                    <li
                       v-for="(sub, id) in item.subCategory"
                       :key="id"
                       class="list-group-item text-hover"
-                      @click.prevent="switchSubPath(item.name, sub.en)">
-                        {{ `- ${sub.zh}` }}
-                    </a>
-                  </div>
+                      @click="switchSubPath(item.name, sub.en)">
+                      {{ `- ${sub.zh}` }}
+                    </li>
+                  </ul>
                 </div>
               </div>
             </div>
           </div>
           <div class="nav-item">
-            <a class="nav-link" href="#" @click="$router.push('/')">Home</a>
+            <a class="nav-link" href="#" @click.prevent="$router.push('/')">Home</a>
           </div>
           <div class="nav-item">
-            <a class="nav-link" href="#" @click="$router.push('/columns')">Column</a>
+            <a class="nav-link" href="#" @click.prevent="$router.push('/columns')">Column</a>
           </div>
           <div class="nav-item">
-            <a class="nav-link" href="#" @click="$router.push('/about')">About</a>
+            <a class="nav-link" href="#" @click.prevent="$router.push('/about')">About</a>
           </div>
           <div class="nav-item">
-            <a class="nav-link" href="#" @click="$router.push('/storeInfo')">實體店資訊</a>
+            <a class="nav-link" href="#" @click.prevent="$router.push('/storeInfo')">實體店資訊</a>
           </div>
           <div class="nav-item">
-            <a class="nav-link" href="#" @click="$router.push('/info')">其他資訊</a>
+            <a class="nav-link" href="#" @click.prevent="$router.push('/info')">其他資訊</a>
           </div>
         </div>
       </div>
@@ -179,8 +184,7 @@ export default {
       wishList: [],
       cartAmount: 0,
       isEmpty: true,
-      uuid: process.env.VUE_APP_UUID,
-      apiPath: process.env.VUE_APP_APIPATH,
+      isShow: false,
     };
   },
   methods: {
@@ -222,7 +226,7 @@ export default {
     addWishListToCart() {
       this.isLoading = true;
       this.wishList.forEach((item) => {
-        const api = `${this.apiPath}${this.uuid}/ec/shopping`;
+        const api = `${process.env.VUE_APP_APIPATH}${process.env.VUE_APP_UUID}/ec/shopping`;
         this.$http
           .post(api, {
             product: item.id,
@@ -238,7 +242,7 @@ export default {
     },
     getCart() {
       this.isLoading = true;
-      const api = `${this.apiPath}${this.uuid}/ec/shopping`;
+      const api = `${process.env.VUE_APP_APIPATH}${process.env.VUE_APP_UUID}/ec/shopping`;
       this.$http
         .get(api)
         .then((res) => {
@@ -250,7 +254,28 @@ export default {
         });
     },
     goToCart() {
-      this.$router.push('/cart/cartDetail');
+      if (this.wishList.length === 0) {
+        this.$router.push('/cart/cartDetail');
+      } else {
+        this.$swal({
+          title: '<h3 style="font-size: 18px">願望清單還有商品！<h3>',
+          html:
+            '<p style="font-size: 12px">點選「加入」，將願望商品加入購物車；<p>'
+            + '<p style="font-size: 12px">或點選「不加入」，清空願望清單。<p>',
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonText: '加入',
+          cancelButtonText: '不加入',
+          reverseButtons: true,
+        }).then((result) => {
+          if (result.isConfirmed) {
+            const isGoToCart = true;
+            this.addWishListToCart(isGoToCart);
+          } else {
+            this.$router.push('/cart/cartDetail');
+          }
+        });
+      }
     },
   },
   created() {
@@ -272,9 +297,22 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  ul {
+    list-style: none;
+    padding: 0;
+    li {
+      cursor: pointer;
+    }
+  }
   .navbar {
     display: none;
     background: rgba(255, 255, 255, 0.85);
+  }
+  .navbar-toggler {
+    outline: none;
+  }
+  .toggler-icon {
+    width: 1.5rem;
   }
   .navbar-brand {
     &:hover {
@@ -318,7 +356,7 @@ export default {
     color: black;
     text-decoration: none;
     a {
-      color: black;
+      color: gray;
       text-decoration: none;
     }
     &:hover {
@@ -351,10 +389,13 @@ export default {
   .navbar-collapse.collapsing {
     left: -75%;
     transition: height 0s ease;
+    margin-top: 1.2rem;
   }
   .navbar-collapse.show {
     left: 0;
     transition: left 300ms ease-in-out;
+    margin-top: 1.2rem;
+    backdrop-filter: blur(5px);
   }
   .navbar-toggler.collapsed ~ .navbar-collapse {
     transition: left 500ms ease-in-out;
@@ -373,6 +414,11 @@ export default {
     font-size: 1rem;
   }
 }
+@media (max-width: 768px) {
+  .dropdown-menu {
+    min-width: 80vw;
+  }
+}
 @media (max-width: 576px) {
   .navbar-brand {
     max-width: 5rem;
@@ -380,6 +426,9 @@ export default {
   .navbar-collapse {
     width: 80%;
     height: 100%;
+  }
+  .dropdown-menu {
+    min-width: 90vw;
   }
   .cart {
     position: relative;

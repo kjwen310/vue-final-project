@@ -55,7 +55,7 @@
               <button
                 type="button"
                 class="btn btn-primary btn-block"
-                @click="addWishListToCart">加入購物車</button>
+                @click="addWishListToCart(isGoToCart = false)">加入購物車</button>
             </div>
           </div>
         </div>
@@ -75,8 +75,6 @@ export default {
       cartAmount: 0,
       // 判斷願望清單是否為空
       isEmpty: true,
-      uuid: process.env.VUE_APP_UUID,
-      apiPath: process.env.VUE_APP_APIPATH,
     };
   },
   methods: {
@@ -101,10 +99,10 @@ export default {
         this.isEmpty = true;
       }
     },
-    addWishListToCart() {
+    addWishListToCart(isGoToCart) {
       this.isLoading = true;
       this.wishList.forEach((item) => {
-        const api = `${this.apiPath}${this.uuid}/ec/shopping`;
+        const api = `${process.env.VUE_APP_APIPATH}${process.env.VUE_APP_UUID}/ec/shopping`;
         this.$http
           .post(api, {
             product: item.id,
@@ -112,6 +110,9 @@ export default {
           })
           .then(() => {
             this.$bus.$emit('addCartAmount');
+            if (isGoToCart) {
+              this.$router.push('/cart/cartDetail');
+            }
           });
       });
       this.wishList = [];
@@ -120,7 +121,7 @@ export default {
     },
     getCart() {
       this.isLoading = true;
-      const api = `${this.apiPath}${this.uuid}/ec/shopping`;
+      const api = `${process.env.VUE_APP_APIPATH}${process.env.VUE_APP_UUID}/ec/shopping`;
       this.$http
         .get(api)
         .then((res) => {
@@ -132,7 +133,29 @@ export default {
         });
     },
     goToCart() {
-      this.$router.push('/cart/cartDetail');
+      if (this.wishList.length === 0) {
+        this.$router.push('/cart/cartDetail');
+      } else {
+        this.$swal({
+          title: '願望清單中還有商品！',
+          html:
+            '點選「加入」，將願望商品加入購物車；'
+            + '<br>'
+            + '或點選「不要加入」，清空願望清單並前往購物車。',
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonText: '加入',
+          cancelButtonText: '不加入',
+          reverseButtons: true,
+        }).then((result) => {
+          if (result.isConfirmed) {
+            const isGoToCart = true;
+            this.addWishListToCart(isGoToCart);
+          } else {
+            this.$router.push('/cart/cartDetail');
+          }
+        });
+      }
     },
   },
   created() {

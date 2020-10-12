@@ -2,11 +2,7 @@
   <div>
     <div id="carousel" class="carousel slide" data-ride="carousel">
       <div class="carousel-inner">
-        <div
-          v-for="(item, index) in productFeature"
-          :key="index"
-          class="carousel-item"
-          :class="{'active': index == 0}">
+        <div v-for="(item, i) in texts" :key="i" class="carousel-item" :class="{'active': i == 0}">
           <div class="carousel-control">
             <div class="bg-cover" :style="'background-image: url(' + item.img + ')'"></div>
             <div class="text-left">
@@ -21,21 +17,11 @@
           </div>
         </div>
       </div>
-      <a
-        class="carousel-control-prev"
-        href="#carousel"
-        role="button"
-        data-slide="prev"
-      >
+      <a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="sr-only">Previous</span>
       </a>
-      <a
-        class="carousel-control-next"
-        href="#carousel"
-        role="button"
-        data-slide="next"
-      >
+      <a class="carousel-control-next" href="#carousel" role="button" data-slide="next">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="sr-only">Next</span>
       </a>
@@ -47,7 +33,7 @@
 export default {
   data() {
     return {
-      productFeature: [
+      texts: [
         {
           img: 'https://images.unsplash.com/photo-1520591799316-6b30425429aa?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=600&q=60',
           title: 'Clothes',
@@ -88,7 +74,8 @@ export default {
     position: relative;
     background-size: cover;
     background-position: center center;
-    min-height: 60vh;
+    height: 60vh;
+    max-height: 409px;
   }
   h2 {
     position: absolute;

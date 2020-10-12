@@ -2,13 +2,13 @@
   <!-- 此元件是左邊的選單 -->
   <div class="menu sticky-top">
     <div class="logo mb-5" @click="$router.push('/')">
-      <img src="https://hexschool-api.s3.us-west-2.amazonaws.com/custom/BEsLDtsR4xR9fSivNCvRwFQz87a4kJIWjVVHUN3kt83cnnJhAn71b7w59KbS7SNrkYVcSo1EDDc0BqOvpiDipAcuGqLBTyRYCpoW6ejj1VEpXk6q8yqIN3rDsCu2gjiT.png" alt="logo">
+      <img src="https://hexschool-api.s3.us-west-2.amazonaws.com/custom/FbhIfAOx2ky5jB29QwBvu5ABReevcmLxUmTHE3SnziaRfusdbH0Ap2IOr4ycIWucPuMYszMczsGyAdhy0ke31dYYLkraePtmbdvL6hi24fsrjiV8a4b94gMBNpvYjE6b.svg" alt="logo">
     </div>
     <div class="accordion mb-5" id="menuAccordion">
       <div v-for="(item, index) in categoryGuide" :key="index">
         <div class="d-flex mb-2" :id="'heading' + index">
             <div class="title">
-              <a href="#" class="a-reform" @click.prevent="switchPath(item.name)">
+              <a href="#" @click.prevent="switchPath(item.name)">
                 {{ item.zh }}
               </a>
             </div>
@@ -27,35 +27,24 @@
           data-parent="#menuAccordion"
         >
           <div>
-            <div class="list-group text-left">
-              <a
-                href="#"
-                v-for="(sub, id) in item.subCategory"
-                :key="id"
+            <ul class="list-group text-left">
+              <li
                 class="list-group-item subtitle"
-                @click.prevent="switchSubPath(item.name, sub.en)">
-                  {{ `- ${sub.zh}` }}
-              </a>
-            </div>
+                v-for="(sub, i) in item.subCategory"
+                :key="i"
+                @click="switchSubPath(item.name, sub.en)">{{ `- ${sub.zh}` }}</li>
+            </ul>
           </div>
         </div>
       </div>
     </div>
     <div class="text-left text-muted">
-      <div class="list-group">
-        <a href="#" class="list-group-item link" @click.prevent="$router.push('/columns')">
-          Column
-        </a>
-        <a href="#" class="list-group-item link" @click.prevent="$router.push('/about')">
-          About
-        </a>
-        <a href="#" class="list-group-item link" @click.prevent="$router.push('/info')">
-          其他資訊
-        </a>
-        <a href="#" class="list-group-item link" @click.prevent="$router.push('/storeInfo')">
-          實體店資訊
-        </a>
-      </div>
+      <ul class="list-group">
+        <li class="list-group-item" @click="$router.push('/columns')">Column</li>
+        <li class="list-group-item" @click="$router.push('/about')">About</li>
+        <li class="list-group-item" @click="$router.push('/info')">其他資訊</li>
+        <li class="list-group-item" @click="$router.push('/storeInfo')">實體店資訊</li>
+      </ul>
     </div>
   </div>
 </template>
@@ -118,13 +107,20 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  ul {
+    list-style: none;
+    padding: 0;
+    li {
+      cursor: pointer;
+    }
+  }
   .sticky-top {
     top: 2rem;
   }
   .menu {
     .logo {
       img {
-        max-width: 60%;
+        max-width: 70%;
         opacity: 0.85;
       }
       &:hover {
@@ -171,6 +167,14 @@ export default {
     &:hover {
       transform: translate(0.3rem);
       opacity: 0.4;
+    }
+  }
+  @media (max-width: 1024px) {
+    .accordion {
+      min-height: 60vh;
+    }
+    .list-group-item {
+      padding-top: 0.5rem;
     }
   }
   @media (max-width: 992px) {
