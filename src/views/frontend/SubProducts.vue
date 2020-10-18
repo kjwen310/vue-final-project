@@ -17,14 +17,19 @@
     <div class="text-left">
       <h2 class="text-left mt-3 mb-5 ">{{ subCategoryList }}</h2>
       <div class="container">
-        <productCard :sub="sub" ref="subProductCard"/>
+        <ProductCard :sub="sub" ref="subProductCard"/>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import ProductCard from '@/components/ProductCard.vue';
+
 export default {
+  components: {
+    ProductCard,
+  },
   data() {
     return {
       para: '',

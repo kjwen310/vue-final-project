@@ -11,85 +11,83 @@
         </li>
       </ol>
     </nav>
-    <div class="mb-5">
-      <div class="row">
-        <div class="col-lg-6 col-md-8 cart-list bg-light py-3">
-          <div v-if="cart.length === 0" class="card p-2">
-            <div class="card-body d-flex align-items-center product-img py-0">
-              <div>
+    <div class="row d-flex justify-content-center bg-light">
+      <div class="col-lg-6 col-md-8 cart-list py-3">
+        <div v-if="cart.length === 0" class="card p-2">
+          <div class="card-body d-flex align-items-center product-img py-0">
+            <div>
+              <img
+                src="https://hexschool-api.s3.us-west-2.amazonaws.com/custom/BEsLDtsR4xR9fSivNCvRwFQz87a4kJIWjVVHUN3kt83cnnJhAn71b7w59KbS7SNrkYVcSo1EDDc0BqOvpiDipAcuGqLBTyRYCpoW6ejj1VEpXk6q8yqIN3rDsCu2gjiT.png"
+                class="rounded d-block my-4"
+                alt="default picture">
+            </div>
+            <div class="text-left py-2">
+              <div class="d-flex">
+                <h5>購物車內沒有商品！</h5>
+              </div>
+            </div>
+           </div>
+        </div>
+        <div v-else class="card mb-2 px-2 pt-2 pb-4" v-for="(item, index) in cart" :key="index">
+          <button
+            type="button"
+            class="close btn-block text-right p-0"
+            aria-label="Close"
+            @click="deleteCartProduct(item.product.id)">
+            <span class="mr-1" aria-hidden="true">&times;</span>
+          </button>
+          <div class="card-body d-flex product-img py-0">
+            <div>
+              <a href="#" @click.prevent="getDetail(item.product.id)">
                 <img
-                 src="https://hexschool-api.s3.us-west-2.amazonaws.com/custom/BEsLDtsR4xR9fSivNCvRwFQz87a4kJIWjVVHUN3kt83cnnJhAn71b7w59KbS7SNrkYVcSo1EDDc0BqOvpiDipAcuGqLBTyRYCpoW6ejj1VEpXk6q8yqIN3rDsCu2gjiT.png"
-                 class="rounded d-block my-4"
-                 alt="default picture">
-              </div>
-              <div class="text-left py-2">
-                <div class="d-flex">
-                  <h5>購物車內沒有商品！</h5>
-                </div>
-              </div>
+                  :src="item.product.imageUrl[0]"
+                  class="rounded d-block"
+                  :alt="item.product.title">
+              </a>
             </div>
-          </div>
-          <div v-else class="card mb-2 px-2 pt-2 pb-4" v-for="(item, index) in cart" :key="index">
-            <button
-              type="button"
-              class="close btn-block text-right p-0"
-              aria-label="Close"
-              @click="deleteCartProduct(item.product.id)">
-              <span class="mr-1" aria-hidden="true">&times;</span>
-            </button>
-            <div class="card-body d-flex product-img py-0">
-              <div>
-                <a href="#" @click.prevent="getDetail(item.product.id)">
-                  <img
-                    :src="item.product.imageUrl[0]"
-                    class="rounded d-block"
-                    :alt="item.product.title">
-                </a>
+            <div class="text-left py-2">
+              <div class="d-flex flex-wrap">
+                <h5 class="mr-auto">{{ item.product.title }}</h5>
+                <span>NT.{{ item.product.price }}</span>
               </div>
-              <div class="text-left py-2">
-                <div class="d-flex flex-wrap">
-                  <h5 class="mr-auto">{{ item.product.title }}</h5>
-                  <span>{{ `NT.${item.product.price}` }}</span>
-                </div>
-                <ul>
-                  <li class="card-text">{{ `- 數量：1${item.product.unit}` }}</li>
-                  <li class="card-text more-text">{{ `- 內容：${item.product.content}` }}</li>
-                </ul>
-              </div>
+               <ul>
+                <li class="card-text">- 數量：1{{ item.product.unit }}</li>
+                <li class="card-text more-text">- 內容：{{ item.product.content }}</li>
+              </ul>
             </div>
-          </div>
-          <div v-if="cart.length !== 0" class="text-right my-4 mr-2">
-            <a href="#" class="delete-all" @click.prevent="deleteAllCart">刪除全部商品</a>
           </div>
         </div>
-        <div class="col-md-4 cart-info bg-light py-3">
-          <div class="card text-left">
-            <h3 class="card-header">購物車資訊</h3>
-            <div class="card-body">
-              <div class="d-flex mb-3">
-                <div class="card-text mr-auto">商品數量</div>
-                <div class="card-text">{{ `${cart.length}件` }}</div>
-              </div>
-              <div class="d-flex mb-3">
-                <div class="card-text mr-auto">金額小計</div>
-                <div class="card-text">{{ `NT.${cartTotal}` }}</div>
-              </div>
-              <div class="d-flex mb-3">
-                <div class="card-text mr-auto">運費小計</div>
-                <div class="card-text">NT.0</div>
-              </div>
-              <hr />
-              <div class="d-flex mb-5">
-                <div class="card-text-total mr-auto">總計</div>
-                <div v-if="cart.length === 0" class="price-style">NT.0</div>
-                <div v-else class="price-style">{{ `NT.${cartTotal}` }}</div>
-              </div>
-              <button
-               class="btn btn-primary btn-block text-white"
-               :disabled="cart.length === 0"
-               @click="switchPath"
-               >前往結帳</button>
+        <div v-if="cart.length !== 0" class="text-right my-4 mr-2">
+          <a href="#" class="delete-all" @click.prevent="deleteAllCart">刪除全部商品</a>
+        </div>
+      </div>
+      <div class="col-md-4 cart-info py-3">
+        <div class="card text-left">
+          <h3 class="card-header">購物車資訊</h3>
+          <div class="card-body">
+            <div class="d-flex mb-3">
+              <div class="card-text mr-auto">商品數量</div>
+              <div class="card-text">{{ cart.length }} 件</div>
             </div>
+            <div class="d-flex mb-3">
+              <div class="card-text mr-auto">金額小計</div>
+              <div class="card-text">NT.{{ cartTotal }}</div>
+            </div>
+            <div class="d-flex mb-3">
+              <div class="card-text mr-auto">運費小計</div>
+              <div class="card-text">NT.0</div>
+            </div>
+            <hr />
+            <div class="d-flex mb-5">
+              <div class="card-text-total mr-auto">總計</div>
+              <div v-if="cart.length === 0" class="price-style">NT.0</div>
+              <div v-else class="price-style">NT.{{ cartTotal }}</div>
+            </div>
+            <button
+              type="button"
+              class="btn btn-primary btn-block text-white"
+              :disabled="cart.length === 0"
+              @click="switchPath">前往結帳</button>
           </div>
         </div>
       </div>
@@ -176,6 +174,11 @@ export default {
     font-size: 0.8rem;
     background-color: transparent;
     padding-left: 0;
+    margin-left: 0.5rem;
+  }
+  .row {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
   }
   .cart-list {
     button {
@@ -216,7 +219,7 @@ export default {
     }
   }
   .cart-info {
-    margin-left: 3rem;
+    margin-left: 2rem;
     .card-header {
       font-size: 1rem;
       font-weight: bolder;
@@ -253,6 +256,13 @@ export default {
     }
   }
   @media (max-width: 414px) {
+    .breadcrumb {
+      margin-left: 0;
+    }
+    .row {
+      margin-left: 0;
+      margin-right: 0;
+    }
     .cart-list {
       .product-img {
         h5 {
@@ -270,12 +280,12 @@ export default {
       }
     }
   }
-  @media (max-width: 280px) {
+  @media (max-width: 320px) {
     .cart-list {
       .product-img {
-        margin-right: 0.4rem;
         img {
           width: 4.5rem;
+          margin-right: 1rem;
         }
         h5 {
           font-size: 0.8rem;

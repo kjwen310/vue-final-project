@@ -5,9 +5,17 @@
         <div class="card">
           <div class="inner">
             <a href="#" @click.prevent="getDetail(product.id)">
-              <img class="card-img-top" :src="product.imageUrl[0]" :alt="product.title + '產品照'" />
+              <img
+                v-if="product.imageUrl[0]"
+                class="card-img-top"
+                :src="product.imageUrl[0]"
+                :alt="product.title + '產品照'" />
+              <img
+                v-else
+                class="card-img-top"
+                src="https://hexschool-api.s3.us-west-2.amazonaws.com/custom/stCMCKGgvom5yjuAR3JlMHaHML7K8RaRl0ak6fIWbJGG1sgjj6AWb6ArORptKxaVrLdzggBHcMAgoS2CyN5WaXYsmSjtVOqQAtGzwyV5EKWZeJKb0rbuyKdDOjTvdNBW.png">
             </a>
-            <button class="wish" type="button" @click="addToWishList(product)">
+            <button type="button" class="wish" @click="addToWishList(product)">
               <div v-if="product.isAddedToWishList === true">
                 <i class="fas fa-heart text-primary"></i>
               </div>
@@ -26,16 +34,16 @@
             <div class="card-title d-flex mb-0">
               <div class="mr-auto">
                 <button type="button" class="p-0" @click.prevent="getDetail(product.id)">
-                  <h5 class="text-muted">{{ product.title }}</h5>
+                  <h5 class="text-left text-muted">{{ product.title }}</h5>
                 </button>
               </div>
             </div>
             <div class="price-style card-text text-left my-0">
               <span class="mr-2">
-                {{ `NT.${product.price}` }}
+                NT.{{ product.price }}
               </span>
               <span v-if="product.origin_price != 0" class="line-through text-muted">
-                {{ `NT.${product.origin_price}` }}
+                NT.{{ product.origin_price }}
               </span>
             </div>
           </div>
@@ -62,17 +70,18 @@ export default {
       const api = `${process.env.VUE_APP_APIPATH}${process.env.VUE_APP_UUID}/ec/products?paged=50`;
       this.$http.get(api).then((res) => {
         if (this.number) {
-          /* eslint-disable */
-          this.products = res.data.data.filter((item) => item.category !== 'banner').filter((item, index) => index < this.number);
+          this.products = res.data.data.filter((item) => item.category !== 'banner').filter(
+            (item, index) => index < this.number,
+          );
         } else if (this.para) {
           this.products = res.data.data.filter((item) => item.category === this.para);
         } else if (this.sub) {
           this.products = res.data.data.filter((item) => item.options.subCategory === this.sub);
         } else if (this.alsoLike) {
           // 利用array.sort(() => Math.random() - 0.5)，以近似隨機排列陣列
-          /* eslint-disable */
-          this.products = res.data.data.filter((item) => item.id !== this.alsoLike.id && item.category === this.alsoLike.category)
-            .sort(() => Math.random() - 0.5).filter((item, index) => index < 4);
+          this.products = res.data.data.filter(
+            (item) => item.id !== this.alsoLike.id && item.category === this.alsoLike.category,
+          ).sort(() => Math.random() - 0.5).filter((item, index) => index < 4);
         }
         // 判斷哪些商品已加入wishList
         this.products.forEach((item) => {
@@ -250,6 +259,9 @@ export default {
           font-size: 0.7rem;
         }
       }
+    }
+    .price-style {
+      letter-spacing: 0;
     }
   }
 </style>

@@ -20,19 +20,24 @@
               v-for="(sub, index) in subCategoryList"
               :key="index"
               class="sub-link pl-0"
-              @click.prevent="switchPath(para, sub.en)">{{ `- ${sub.zh}` }}</div>
+              @click.prevent="switchPath(para, sub.en)">- {{ sub.zh }}</div>
           </div>
         </div>
       </div>
     </div>
     <div class="container">
-      <productCard :para="para" ref="productCard"/>
+      <ProductCard :para="para" ref="productCard"/>
     </div>
   </div>
 </template>
 
 <script>
+import ProductCard from '@/components/ProductCard.vue';
+
 export default {
+  components: {
+    ProductCard,
+  },
   data() {
     return {
       para: '',

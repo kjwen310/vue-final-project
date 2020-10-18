@@ -14,23 +14,25 @@
         </div>
       </div>
     </div>
-    <foot />
+    <Foot />
     <Gotop />
   </div>
 </template>
 
 <script>
+import Navbar from '@/components/Navbar.vue';
 import Menu from '@/components/Menu.vue';
 import Sidebar from '@/components/Sidebar.vue';
+import Foot from '@/components/Footer.vue';
 import Gotop from '@/components/Gotop.vue';
-import Navbar from '@/components/Navbar.vue';
 
 export default {
   components: {
+    Navbar,
     Menu,
     Sidebar,
+    Foot,
     Gotop,
-    Navbar,
   },
   data() {
     return {};

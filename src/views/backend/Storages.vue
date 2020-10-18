@@ -18,7 +18,7 @@
       刪除點選的資料
     </button>
 
-    <pagination :pages="pagination" @emitPages="getData" />
+    <Pagination :pages="pagination" @emitPages="getData" />
     <div
       id="deleteModal"
       class="modal fade"
@@ -48,14 +48,14 @@
           </div>
           <div class="modal-footer">
             <button
-             type="button"
-             class="btn btn-outline-secondary"
-             @click="cancelDelete">取消</button>
+              type="button"
+              class="btn btn-outline-secondary"
+              @click="cancelDelete">取消</button>
             <button
-             v-if="tempData.length !== 0"
-             type="button"
-             class="btn btn-danger"
-             @click="deleteData">確認刪除</button>
+              v-if="tempData.length !== 0"
+              type="button"
+              class="btn btn-danger"
+              @click="deleteData">確認刪除</button>
           </div>
         </div>
       </div>
@@ -69,7 +69,7 @@ import Pagination from '@/components/Pagination.vue';
 
 export default {
   components: {
-    pagination: Pagination,
+    Pagination,
   },
   data() {
     return {

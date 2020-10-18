@@ -3,8 +3,8 @@
   <nav class="navbar navbar-expand-lg fixed-top text-left mb-3">
     <div class="container">
       <button
-        class="navbar-toggler"
         type="button"
+        class="navbar-toggler"
         data-toggle="collapse"
         data-target="#navbarCollapse"
         aria-controls="navbarCollapse"
@@ -52,21 +52,21 @@
                 <thead>
                   <tr>
                     <th scope="col">名稱</th>
-                    <th scope="col" width="45">數量</th>
-                    <th scope="col" width="80">單價</th>
+                    <th scope="col" width="45" class="more-text">數量</th>
+                    <th scope="col" width="65">單價</th>
                     <th scope="col" width="45">刪除</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr v-for="(item, index) in wishList" :key="index">
-                    <td class="align-middle">{{ item.title }}</td>
-                    <td class="align-middle">{{ `1 ${item.unit}` }}</td>
-                    <td class="align-middle">{{ `NT. ${item.price}` }}</td>
+                    <td class="align-middle title" @click="getDetail(item.id)">{{ item.title }}</td>
+                    <td class="align-middle more-text">1 {{ item.unit }}</td>
+                    <td class="align-middle">NT.{{ item.price }}</td>
                     <td class="align-middle text-center">
                       <button
-                      type="button"
-                      class="text-muted btn-none"
-                      @click="deleteWishItem(item)">
+                        type="button"
+                        class="text-muted btn-none"
+                        @click="deleteWishItem(item)">
                         <i class="fas fa-trash-alt" aria-hidden="true"></i>
                       </button>
                     </td>
@@ -78,7 +78,7 @@
                 <div class="dropdown-divider"></div>
                 <button
                   type="button"
-                  class="btn btn-primary btn-block"
+                  class="btn btn-primary btn-block add-cart-btn"
                   @click="addWishListToCart">加入購物車</button>
               </div>
             </div>
@@ -96,8 +96,8 @@
                     </a>
                   </div>
                     <button
-                      class="btn-none ml-auto"
                       type="button"
+                      class="btn-none ml-auto"
                       data-toggle="collapse"
                       :data-target="'#collapse' + index"
                       aria-expanded="true"
@@ -116,7 +116,7 @@
                       :key="id"
                       class="list-group-item text-hover"
                       @click="switchSubPath(item.name, sub.en)">
-                      {{ `- ${sub.zh}` }}
+                      - {{ sub.zh }}
                     </li>
                   </ul>
                 </div>
@@ -280,6 +280,12 @@ export default {
         });
       }
     },
+    getDetail(productId) {
+      this.$router.push({
+        name: 'Product',
+        params: { id: productId },
+      });
+    },
   },
   created() {
     this.getCart();
@@ -331,6 +337,17 @@ export default {
   .dropdown-menu {
     border: none;
     background-color: transparent;
+    .title {
+      cursor: pointer;
+      &:hover {
+        color: #ffa010;
+      }
+    }
+    .add-cart-btn {
+      color: white;
+      font-weight: bolder;
+      letter-spacing: 0.1rem;
+    }
   }
   .cart {
     position: relative;
@@ -406,6 +423,8 @@ export default {
   .dropdown-menu {
     min-width: 50vw;
     background: rgba(255,255,255,0.85);
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(3px);
     border: none;
     margin-top: 2rem;
   }
@@ -443,6 +462,20 @@ export default {
   }
   .fa-size {
     font-size: 0.85rem;
+  }
+}
+@media (max-width: 360px) {
+  .dropdown-menu {
+    th, td {
+      font-size: 0.8rem;
+    }
+    .more-text {
+      display: none;
+    }
+    .add-cart-btn {
+      font-size: 0.8rem;
+      letter-spacing: 0.1rem;
+    }
   }
 }
 </style>

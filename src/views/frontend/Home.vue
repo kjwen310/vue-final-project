@@ -41,9 +41,9 @@
                 量廉價的衣物消費。
               </p>
               <button
-               type="button"
-               class="btn btn-outline-dark btn-block"
-               @click="$router.push('/shop/about')">關於我們</button>
+                type="button"
+                class="btn btn-outline-dark btn-block"
+                @click="$router.push('/shop/about')">關於我們</button>
             </div>
           </div>
         </div>

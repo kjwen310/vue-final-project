@@ -16,21 +16,12 @@ import {
 import * as rules from 'vee-validate/dist/rules';
 import zhTW from 'vee-validate/dist/locale/zh_TW.json';
 import VueSweetalert2 from 'vue-sweetalert2';
-import Footer from '@/components/Footer.vue';
-import ProductCard from './components/ProductCard.vue';
 import App from './App.vue';
 import router from './router';
 import './bus';
 import 'bootstrap';
 
 Vue.config.productionTip = false;
-
-Vue.component('Loading', Loading);
-Vue.component('productCard', ProductCard);
-Vue.component('foot', Footer);
-Vue.use(VueAxios, axios);
-Vue.use(VueSweetalert2);
-window.$ = $;
 
 // vee-validate
 Object.keys(rules).forEach((rule) => {
@@ -43,8 +34,13 @@ configure({
   },
 });
 localize('tw', zhTW);
+
 Vue.component('ValidationObserver', ValidationObserver);
 Vue.component('ValidationProvider', ValidationProvider);
+Vue.component('Loading', Loading);
+Vue.use(VueAxios, axios);
+Vue.use(VueSweetalert2);
+window.$ = $;
 
 new Vue({
   created() {

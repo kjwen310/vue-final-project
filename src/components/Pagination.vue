@@ -8,9 +8,7 @@
             href="#"
             aria-label="Previous"
             @click.prevent="emitPages(pages.current_page - 1)"
-          >
-            <span aria-hidden="true">&laquo;</span>
-          </a>
+          ><span aria-hidden="true">&laquo;</span></a>
         </li>
         <li
           v-for="(item, index) in pages.total_pages"
@@ -26,14 +24,13 @@
             href="#"
             aria-label="Next"
             @click.prevent="emitPages(pages.current_page + 1)"
-          >
-            <span aria-hidden="true">&raquo;</span>
-          </a>
+          ><span aria-hidden="true">&raquo;</span></a>
         </li>
       </ul>
     </nav>
   </div>
 </template>
+
 <script>
 export default {
   props: {

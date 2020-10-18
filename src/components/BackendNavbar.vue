@@ -3,17 +3,13 @@
     <div class="container">
       <a class="navbar-brand" href="#">vatta 後台管理系統</a>
       <button
-        class="navbar-toggler"
         type="button"
+        class="navbar-toggler"
         data-toggle="collapse"
         data-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent"
         aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon" />
-      </button>
-
+        aria-label="Toggle navigation"><span class="navbar-toggler-icon" /></button>
       <div id="navbarSupportedContent" class="collapse navbar-collapse">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">

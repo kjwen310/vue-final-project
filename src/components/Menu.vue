@@ -13,8 +13,8 @@
               </a>
             </div>
             <button
-              class="ml-auto"
               type="button"
+              class="ml-auto"
               data-toggle="collapse"
               :data-target="'#collapse' + index"
               aria-expanded="true"
@@ -32,7 +32,7 @@
                 class="list-group-item subtitle"
                 v-for="(sub, i) in item.subCategory"
                 :key="i"
-                @click="switchSubPath(item.name, sub.en)">{{ `- ${sub.zh}` }}</li>
+                @click="switchSubPath(item.name, sub.en)">- {{ sub.zh }}</li>
             </ul>
           </div>
         </div>

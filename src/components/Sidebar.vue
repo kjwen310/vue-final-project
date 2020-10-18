@@ -18,10 +18,7 @@
           class="btn-sm dropdown-toggle"
           data-toggle="dropdown"
           aria-haspopup="true"
-          aria-expanded="false"
-        >
-          <i class="text-muted far fa-heart"></i>
-        </button>
+          aria-expanded="false"><i class="text-muted far fa-heart"></i></button>
         <div id="stopPropagation" class="dropdown-menu" data-stopPropagation="true">
           <div class="px-3 py-4">
             <table class="table table-sm px-3">
@@ -35,14 +32,14 @@
               </thead>
               <tbody>
                 <tr v-for="(item, index) in wishList" :key="index">
-                  <td class="align-middle">{{ item.title }}</td>
-                  <td class="align-middle">{{ `1 ${item.unit}` }}</td>
-                  <td class="align-middle">{{ `NT. ${item.price}` }}</td>
+                  <td class="align-middle title" @click="getDetail(item.id)">{{ item.title }}</td>
+                  <td class="align-middle">1{{ item.unit }}</td>
+                  <td class="align-middle">NT.{{ item.price }}</td>
                   <td class="align-middle text-center">
                     <button
-                     type="button"
-                     class="text-muted trash-btn"
-                     @click="deleteWishItem(item)">
+                      type="button"
+                      class="text-muted trash-btn"
+                      @click="deleteWishItem(item)">
                       <i class="fas fa-trash-alt" aria-hidden="true"></i>
                     </button>
                   </td>
@@ -54,7 +51,7 @@
               <div class="dropdown-divider"></div>
               <button
                 type="button"
-                class="btn btn-primary btn-block"
+                class="btn btn-primary btn-block add-cart-btn"
                 @click="addWishListToCart(isGoToCart = false)">加入購物車</button>
             </div>
           </div>
@@ -157,6 +154,12 @@ export default {
         });
       }
     },
+    getDetail(productId) {
+      this.$router.push({
+        name: 'Product',
+        params: { id: productId },
+      });
+    },
   },
   created() {
     // 元件創立時先獲取購物車資料(取得商品數)，並開啟「更新願望清單資料」的監聽
@@ -213,6 +216,14 @@ export default {
       min-width: 40vw;
       background: rgba(255,255,255,0.85);
       border: none;
+      box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.15);
+      backdrop-filter: blur(3px);
+      .title {
+        cursor: pointer;
+        &:hover {
+          color: #ffa010;
+        }
+      }
       .trash-btn {
         background-color: transparent;
         border: none;
@@ -222,6 +233,11 @@ export default {
             color: #ffa010;
           }
         }
+      }
+      .add-cart-btn {
+        color: white;
+        font-weight: bolder;
+        letter-spacing: 0.1rem;
       }
     }
   }

@@ -9,9 +9,10 @@
               <h2 class="letter-spacing">{{ item.title }}</h2>
               <div class="category-intro">
                 <p class="mb-3">{{ item.intro }}</p>
-                <button class="btn btn-outline-dark btn-block" @click="switchPath(item.name)">
-                  see more
-                </button>
+                <button
+                  type="button"
+                  class="btn btn-outline-dark btn-block"
+                  @click="switchPath(item.name)">see more</button>
               </div>
             </div>
           </div>

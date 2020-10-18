@@ -9,16 +9,21 @@
           <p>{{ item.indexText }}</p>
         </div>
       </div>
-      <div class="container justify-content-center">
+      <div class="container">
         <router-view />
       </div>
     </div>
-    <foot />
+    <Foot />
   </div>
 </template>
 
 <script>
+import Foot from '@/components/Footer.vue';
+
 export default {
+  components: {
+    Foot,
+  },
   data() {
     return {
       cartIndex: [

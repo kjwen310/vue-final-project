@@ -2,7 +2,7 @@
   <div class="container">
     <Loading :active.sync="isLoading" />
     <div class="text-right">
-      <button class="btn btn-outline-dark" @click="openModal('new')">建立新產品</button>
+      <button type="button" class="btn btn-outline-dark" @click="openModal('new')">建立新產品</button>
     </div>
     <table class="table mt-4">
       <thead>
@@ -32,13 +32,13 @@
           <td>
             <div class="btn-group">
               <button
-               class="btn btn-outline-primary btn-sm"
-               @click="openModal('edit', item)"
-               >編輯</button>
+                type="button"
+                class="btn btn-outline-primary btn-sm"
+                @click="openModal('edit', item)">編輯</button>
               <button
-               class="btn btn-outline-danger btn-sm"
-               @click="openModal('delete', item)"
-               >刪除</button>
+                type="button"
+                class="btn btn-outline-danger btn-sm"
+                @click="openModal('delete', item)">刪除</button>
             </div>
           </td>
         </tr>

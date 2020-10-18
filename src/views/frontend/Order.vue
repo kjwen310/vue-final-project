@@ -12,18 +12,18 @@
         <li class="breadcrumb-item active">填寫資料</li>
       </ol>
     </nav>
-    <div class="row d-flex justify-content-center">
-      <div class="col-md-4 order-info bg-light py-3">
+    <div class="row d-flex justify-content-center bg-light">
+      <div class="col-md-4 order-info py-3">
         <div class="card text-left">
           <h3 class="card-header">訂單說明</h3>
           <div class="card-body">
             <div class="d-flex mb-3">
               <div class="card-text mr-auto">數量</div>
-              <div class="card-text">{{ `${amount}件` }}</div>
+              <div class="card-text">{{ amount }} 件</div>
             </div>
             <div class="d-flex mb-4">
               <div class="card-text mr-auto">總計</div>
-              <span class="price-style">{{ `NT.${total}` }}</span>
+              <span class="price-style">NT.{{ total }}</span>
             </div>
             <hr class="mb-4" />
             <div class="mb-3">
@@ -41,7 +41,7 @@
           </div>
         </div>
       </div>
-      <div class="col-lg-6 col-md-8 bg-light py-3">
+      <div class="col-lg-6 col-md-8 py-3">
         <div class="form text-left py-3 px-1">
           <validation-observer v-slot="{ invalid }">
             <form class="px-3" @submit.prevent="createOrder">
@@ -136,9 +136,11 @@
                 <button
                   type="button"
                   class="btn btn-outline-info"
-                  @click="$router.push('shop/products/clothes')"
-                >取消</button>
-                <button type="submit" class="btn btn-primary ml-3" :disabled="invalid">送出訂單</button>
+                  @click="$router.push('shop/products/clothes')">取消</button>
+                <button
+                  type="submit"
+                  class="btn btn-primary text-white ml-3"
+                  :disabled="invalid">送出訂單</button>
               </div>
             </form>
           </validation-observer>
@@ -197,6 +199,11 @@ export default {
     font-size: 0.8rem;
     background-color: transparent;
     padding-left: 0;
+    margin-left: 0.5rem;
+  }
+  .row {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
   }
   .order-info {
     .card-header {
@@ -222,5 +229,31 @@ export default {
   .form {
     border: 2px solid lightgray;
     border-radius: 0.5rem;
+    button {
+      font-weight: bolder;
+      letter-spacing: 0.1rem;
+    }
+  }
+  @media (max-width: 768px) {
+    .card-text {
+      letter-spacing: 0;
+    }
+    .order-info {
+      span {
+        letter-spacing: 0.1rem;
+      }
+    }
+  }
+  @media (max-width: 414px) {
+    .breadcrumb {
+      margin-left: 0;
+    }
+    .row {
+      margin-left: 0;
+      margin-right: 0;
+    }
+    .card-text {
+      font-size: 0.9rem;
+    }
   }
 </style>

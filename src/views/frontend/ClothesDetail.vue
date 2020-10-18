@@ -5,7 +5,8 @@
       <div class="row">
         <div class="col-md-6">
           <div class="mb-2 major-img">
-            <img class="img-fluid" :src="majorImg" alt />
+            <img v-if="majorImg" class="img-fluid" :src="majorImg" :alt="product.title + '產品照'" />
+            <img v-else class="img-fluid" src="https://hexschool-api.s3.us-west-2.amazonaws.com/custom/stCMCKGgvom5yjuAR3JlMHaHML7K8RaRl0ak6fIWbJGG1sgjj6AWb6ArORptKxaVrLdzggBHcMAgoS2CyN5WaXYsmSjtVOqQAtGzwyV5EKWZeJKb0rbuyKdDOjTvdNBW.png">
             <div>
               <p>{{ `0${tempIndex + 1} / 0${product.imageUrl.length}` }}</p>
             </div>
@@ -26,7 +27,7 @@
             <h2>{{ product.title }}</h2>
           </div>
           <div class="my-3">
-            <span class="price mr-3">{{ `NT.${product.price}` }}</span>
+            <span v-if="product.price" class="price mr-3">NT.{{ product.price }}</span>
             <span v-if="product.origin_price != 0" class="origin-price">
               {{ `NT.${product.origin_price}` }}
             </span>
@@ -38,14 +39,12 @@
             <button
               v-if="isDisabled"
               type="button"
-              class="btn btn-outline-dark btn-block disabled"
-              >已加入購物車！</button>
+              class="btn btn-outline-dark btn-block disabled">已加入購物車！</button>
             <button
               v-else
               type="button"
               class="btn btn-outline-dark btn-block"
-              @click="addToCart(product.id)"
-              >加入購物車</button>
+              @click="addToCart(product.id)">加入購物車</button>
           </div>
           <div class="text-left">
             <div class="container d-flex">
@@ -94,13 +93,18 @@
     </div>
     <div class="container-fluid also-like">
       <h2 class="h3 text-muted text-left pb-3">您可能也會喜歡</h2>
-      <productCard :alsoLike="alsoLike" />
+      <ProductCard :alsoLike="alsoLike" />
     </div>
   </div>
 </template>
 
 <script>
+import ProductCard from '@/components/ProductCard.vue';
+
 export default {
+  components: {
+    ProductCard,
+  },
   data() {
     return {
       id: '',
